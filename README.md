@@ -10,4 +10,4 @@
 * Javascript
 ### GitHub Pages
 
-Сайт на GitHub Pages:
+Сайт на GitHub Pages: https://have2go.github.io/mesto/
