@@ -9,7 +9,7 @@
 
 @media screen and (max-width: 690px) {
   .popup__title {
-    font-size: 17px; /* при значении как в макете 18px, текст не помещается в одну строчку */
+    font-size: 18px;
     line-height: 22px;
     margin: 25px 0 0 22px;
     width: 238px;

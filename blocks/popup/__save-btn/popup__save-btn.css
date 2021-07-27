@@ -10,12 +10,15 @@
   line-height: 22px;
   color: white;
   cursor: pointer;
+  margin-bottom: 37px;
 }
 
 @media screen and (max-width: 690px) {
   .popup__save-btn {
     width: 238px;
     height: 46px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 

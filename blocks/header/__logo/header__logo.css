@@ -1,13 +1,16 @@
 .header__logo {
-  background-image: url('../../../images/logo.svg');
+  background: url(../../../images/logo.svg);
   background-repeat: no-repeat;
-  height: 100%;
+  padding-bottom: 74px; /* Неожиданно сработавший вариант, но я не знаю, корректен ли он. Уже сломал голову как обойтись без высоты в данном случае,
+  всегда высота хэдера остается 0px. Пробовал в html добавить сразу две img управлять их видимостью с помощью модификаторов и display: none,
+  но автотесты такое не пропускают */
 }
 
 @media screen and (max-width: 690px) {
   .header__logo {
-    background-image: url('../../../images/logo-small.svg');
+    background: url(../../../images/logo-small.svg);
     background-repeat: no-repeat;
     min-width: 282px;
+    padding-bottom: 56px;
   }
 }

@@ -6,6 +6,5 @@
 @media screen and (max-width: 690px) {
   .profile__info-container {
     flex-direction: column;
-    max-height: 250px;
   }
 }
