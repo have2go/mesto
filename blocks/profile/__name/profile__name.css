@@ -8,13 +8,14 @@
   display: flex;
   align-items: center;
   max-width: 300px;
-  text-overflow: ellipsis; /* чтобы введенный длинный текст не двигал всю страницу (пока не понял почему не появляется многоточие) */
+  text-overflow: ellipsis; /* вообще не понимаю как многоточие добавить( */
   white-space: nowrap;
   overflow: hidden;
 }
 
 @media screen and (max-width: 1279px) {
   .profile__name {
+    max-width: 250px;
     font-size: 35px;
     line-height: 1.5em;
   }
