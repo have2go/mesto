@@ -23,7 +23,24 @@ const closeImage = document.querySelector('.img-popup__close-btn');
 //// открывашки
 function openPopup(element) {
   element.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
+  document.addEventListener('mousedown', closePopupMouse);
 }
+
+function closePopupEsc(el) {
+  if (el.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+
+function closePopupMouse(el) {
+  // console.log(el.target);
+  if (el.target.classList.contains('popup_opened')) {
+    closePopup(el.target);
+  }
+}
+
 // функция открывает попап, добавляя модификатор блоку popup и вносит в инпуты значения со страницы
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
