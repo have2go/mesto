@@ -14,7 +14,6 @@ const hideInputError = (formElement, inputElement, obj) => {
 
 const enableValidation = (obj) => {
   const formList = Array.from(document.querySelectorAll(obj.formSelector));
-  // console.log(formList);
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', function (evt) {
       evt.preventDefault();
@@ -60,6 +59,17 @@ function toggleButtonState(inputList, buttonElement, obj) {
   }
 };
 
+function removeValidationErrors(popup) {
+  const formInput = popup.querySelectorAll('.popup__input');
+  formInput.forEach((el) => {
+    el.classList.remove('popup__input_type_error');
+  });
+  const formError = popup.querySelectorAll('.popup__input-error');
+  formError.forEach((el) => {
+    el.classList.remove('popup__input-error_active');
+    el.textContent = '';
+  });
+}
 
 enableValidation({
   formSelector: '.popup__form',
@@ -67,5 +77,6 @@ enableValidation({
   submitButtonSelector: '.popup__save-btn',
   inactiveButtonClass: 'popup__save-btn_inactive',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
+  errorClass: 'popup__input-error_active',
+  popups: '.popup'
 });

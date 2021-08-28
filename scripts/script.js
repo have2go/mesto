@@ -27,20 +27,6 @@ function openPopup(element) {
   document.addEventListener('mousedown', closePopupMouse);
 }
 
-function closePopupEsc(el) {
-  if (el.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
-}
-
-function closePopupMouse(el) {
-  // console.log(el.target);
-  if (el.target.classList.contains('popup_opened')) {
-    closePopup(el.target);
-  }
-}
-
 // функция открывает попап, добавляя модификатор блоку popup и вносит в инпуты значения со страницы
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
@@ -55,18 +41,37 @@ function openNewCardPopup() {
 //// закрывашки
 function closePopup(element) {
   element.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
+  document.removeEventListener('mousedown', closePopupMouse);
+  removeValidationErrors(element);
 }
 
 function closePopupProfile() {
   closePopup(popupProfile);
+  removeValidationErrors(popupProfile);
 }
 
 function closePopupNewCard() {
   closePopup(popupNewCard);
+  formNewCard.reset();
+  removeValidationErrors(popupNewCard);
 }
 
 function closePopupBigImage() {
   closePopup(popupBigImage);
+}
+
+function closePopupEsc(el) {
+  if (el.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+
+function closePopupMouse(el) {
+  if (el.target.classList.contains('popup_opened')) {
+    closePopup(el.target);
+  }
 }
 
 // функция заменяет имя и описание на страницы данными из инпутов и зыкрывает попап
@@ -116,6 +121,10 @@ function renderList() {
 
 renderList();
 
+function disableSubmitButton(evt) {
+  evt.target.lastChild.previousSibling.classList.add('popup__save-btn_inactive');
+  evt.target.lastChild.previousSibling.setAttribute('disabled', true);
+}
 
 // слушатели
 editButton.addEventListener('click', openProfilePopup);
@@ -131,7 +140,7 @@ formNewCard.addEventListener('submit', (evt) => {
   };
   const newCard = createCard(cardInfo);
   cardsList.insertBefore(newCard, cardsList.firstChild);
+  disableSubmitButton(evt);
   closePopupNewCard();
-  formNewCard.reset();
 });
 closeImage.addEventListener('click', closePopupBigImage);
