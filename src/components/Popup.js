@@ -1,8 +1,9 @@
 export default class Popup {
     constructor(popupSelector) {
-        this._popupSelector = popupSelector;
+        this._popup = document.querySelector(popupSelector);
         this._handleEscClose = this._handleEscClose.bind(this); // привязываю обработчик к конкретному попапу, иначе он применяет this.close() ко всему документу и ничего не работает
         this._handleMouseClose = this._handleMouseClose.bind(this);
+        this._closeBtn = this._popup.querySelector('.popup__close-btn');
     }
 
     _handleEscClose(el) {
@@ -20,20 +21,22 @@ export default class Popup {
     _removeEventListeners() {
         document.removeEventListener('keydown', this._handleEscClose);
         document.removeEventListener('mousedown', this._handleMouseClose);
+        this._closeBtn.removeEventListener('click', () => {this.close()});
     }
 
     setEventListeners() {
         document.addEventListener('keydown', this._handleEscClose);
         document.addEventListener('mousedown', this._handleMouseClose);
+        this._closeBtn.addEventListener('click', () => {this.close()});
     }
 
     open() {
         this.setEventListeners();
-        document.querySelector(this._popupSelector).classList.add('popup_opened');
+        this._popup.classList.add('popup_opened');
     }
 
     close() {
         this._removeEventListeners();
-        document.querySelector(this._popupSelector).classList.remove('popup_opened');
+        this._popup.classList.remove('popup_opened');
     }
 }
