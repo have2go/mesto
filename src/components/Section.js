@@ -1,13 +1,12 @@
 export default class Section {
-    constructor({ data, renderer }, containerSelector) {
-        this._items = data;
+    constructor({ renderer }, containerSelector) {
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
     }
 
 
-    createCards() {
-        this._items.forEach((item) => {
+    createCards(data) {
+        data.forEach((item) => {
           this._renderer(item);
         });
     }
@@ -15,7 +14,7 @@ export default class Section {
     addItem(card) {
         this._container.append(card);
     }
-    // я создаю метод для добавления карточки в начало списка при добавлении её пользователем
+
     addNewCard(card) {
         this._container.prepend(card);
     }
