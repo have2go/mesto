@@ -5,10 +5,20 @@ export default class PopupWithConfirm extends Popup {
         super(popupSelector);
         this._submitCallback = submitCallback;
         this._form = document.querySelector('.confirm-popup__content');
+        this._submitButton = this._popup.querySelector('.confirm-popup__btn');
+        this._submitButtonText = this._popup.querySelector('.confirm-popup__btn').textContent;
 
         this._card = null;
         this._cardId = null;
     }
+
+    renderLoading(isLoading) {
+        if (isLoading) {
+          this._submitButton.textContent = 'Удаление...';
+        } else {
+          this._submitButton.textContent = this._submitButtonText;
+        }
+      }
 
     getCardToDelete(card, id) {
         this._card = card;

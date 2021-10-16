@@ -30,7 +30,7 @@ export default class Card {
   }
 
   _removeTrashButtons() {
-    if (this._id != this._userId) {
+    if (this._id !== this._userId) {
       this._trashButton.remove();
     }
   }
