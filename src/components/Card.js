@@ -38,10 +38,8 @@ export default class Card {
 
   _likeHandler = (e) => {
     if (!this._likeButton.classList.contains('elements__like_active')) {
-      this._likeButton.classList.add('elements__like_active');
-      this._setLike(e, this._obj);
+      this._setLike(e, this._obj)
     } else {
-      this._likeButton.classList.remove('elements__like_active');
       this._deleteLike(e, this._obj);
     }
   }

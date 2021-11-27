@@ -122,11 +122,13 @@ function submitProfileForm(inputValues) {
   popupProfile.renderLoading(true);
   userInfo.setUserInfo(inputValues);
   api.setProfileInfo(userInfo.getUserInfo())
+  .then(() => {
+    popupProfile.close();
+  })
   .catch(err => console.log(`Ошибка.....: ${err}`))
   .finally(() => {
     popupProfile.renderLoading(false);
     formProfileValidator.disableSubmitButton();
-    popupProfile.close();
   });
 };
 
@@ -134,13 +136,13 @@ function submitNewCardForm(inputValues) {
   popupNewCard.renderLoading(true);
   api.postNewCard(inputValues.name, inputValues.link)
   .then(result => {
-    cardList.addNewCard(createCard(result))
+    cardList.addNewCard(createCard(result));
+    popupNewCard.close();
   })
   .catch(err => console.log(`Ошибка.....: ${err}`))
   .finally(() => {
     popupNewCard.renderLoading(false);
     formNewCardValidator.disableSubmitButton();
-    popupNewCard.close();
   });
 }
 
@@ -149,18 +151,19 @@ function submitAvatarForm(data) {
   api.setAvatar(data.link)
   .then(result => {
     userInfo.setUserAvatar(result)
+    avatarPopup.close();
   })
   .catch(err => console.log(`Ошибка.....: ${err}`))
   .finally(() => {
     avatarPopup.renderLoading(false);
-    avatarPopup.close();
   });
 }
 
 function setLike(e, data) {
   api.addLike(data)
   .then(result => {
-    e.target.nextElementSibling.textContent = result.likes.length
+    e.target.nextElementSibling.textContent = result.likes.length;
+    e.target.classList.add('elements__like_active');
   })
   .catch(err => console.log(`Ошибка.....: ${err}`));
 }
@@ -168,7 +171,8 @@ function setLike(e, data) {
 function deleteLike(e, data) {
   api.deleteLike(data)
   .then(result => {
-    e.target.nextElementSibling.textContent = result.likes.length
+    e.target.nextElementSibling.textContent = result.likes.length;
+    e.target.classList.remove('elements__like_active');
   })
   .catch(err => console.log(`Ошибка.....: ${err}`));
 }
